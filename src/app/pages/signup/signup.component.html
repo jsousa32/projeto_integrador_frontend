@@ -1,1 +1,91 @@
-<p>signup works!</p>
+<div class="container-fluid">
+    <mat-card>
+        <mat-card-header>
+            <h1>
+                Faça seu cadastro
+            </h1>
+        </mat-card-header>
+        <mat-card-content class="mt-2">
+            <form [formGroup]="form">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput formControlName="nome" placeholder="Ex: Bruna Castelo Branco">
+                            <mat-error>Nome inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Nome Mãe</mat-label>
+                            <input matInput formControlName="nomeMae" placeholder="Ex: Adriele Castelo Branco">
+                            <mat-error>Nome mãe inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Data Nascimento</mat-label>
+                            <input formControlName="dataNascimento" mask="00/00/0000" matInput placeholder="20/20/1990">
+                            <mat-error>Data nascimento inválida</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>CPF</mat-label>
+                            <input formControlName="cpf" mask="000.000.000-00" matInput placeholder="CPF">
+                            <mat-error>CPF inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Número SUS</mat-label>
+                            <input formControlName="sus" mask="000000000000000" matInput placeholder="Número SUS">
+                            <mat-error>Número SUS inválido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Gênero</mat-label>
+                            <mat-select formControlName="genero">
+                                <mat-option value="homem">Homem</mat-option>
+                                <mat-option value="mulher">Mulher</mat-option>
+                            </mat-select>
+                            <mat-error>Genêro inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Endereço</mat-label>
+                            <input formControlName="endereco" matInput placeholder="Rua das Ostras Nº 10">
+                            <mat-error>Endereço inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Telefone</mat-label>
+                            <input formControlName="telefone" mask="(00) 00000-0000" matInput
+                                placeholder="(35) 99123-4567">
+                            <mat-error>Telefone inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input formControlName="email" matInput placeholder="postinhoubs@gov.com.br">
+                            <mat-error>E-mail inválido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>Senha</mat-label>
+                            <input formControlName="senha" matInput [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error>Senha inválida</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-footer class=" mb-2">
+            <div class="m-2">
+                <button mat-fab extended class="login-button" [disabled]="form.invalid">
+                    Cadastrar
+                </button>
+            </div>
+            <div class="mt-4 mb-3">
+                <span>
+                    Já é cadastrado?
+                    <a href="login">
+                        Conecte-se aqui!
+                    </a>
+                </span>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</div>
