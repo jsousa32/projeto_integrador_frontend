@@ -1,0 +1,94 @@
+.logo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;
+
+    .logo {
+        text-align: center;
+        width: 3rem;
+        min-width: 3rem;
+        padding: 0.313rem;
+        cursor: pointer;
+
+        img {
+            height: 40px;
+            width: 40px;
+        }
+    }
+
+    .logo-text {
+        margin-left: 1.5rem;
+        font-size: 20px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .btn-close {
+        margin-left: 1.5rem;
+        cursor: pointer;
+        height: 1.45rem;
+        border-radius: 50%;
+        background-color: transparent;
+        border: none;
+
+        .fa-times {
+            color: #fff;
+            font-size: 24px;
+
+        }
+    }
+}
+
+.sidenav-nav {
+    list-style: none;
+    padding: 4rem 0.938rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    .sidenav-nav-item {
+        width: 100%;
+        margin-bottom: 0.625rem;
+
+        .sidenav-nav-link {
+            display: flex;
+            align-items: center;
+            height: 3rem;
+            color: #f3f3f3;
+            text-decoration: none;
+            border-radius: 0.625rem;
+            transition: color .3s ease;
+
+            .sidenav-link-icon {
+                font-size: 20px !important;
+                margin-left: 1.75rem;
+                width: 4rem;
+                min-width: 4rem;
+            }
+
+            .sidenav-link-text {
+                margin-right: 1.5rem;
+                font-size: 18px;
+            }
+        }
+    }
+
+    .sidenav-nav-item:hover {
+        .sidenav-nav-link {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+}
+
+.active {
+    background-color: #fff;
+
+    .sidenav-link-icon,
+    .sidenav-link-text {
+        color: #000;
+    }
+}

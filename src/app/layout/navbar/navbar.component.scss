@@ -1,0 +1,53 @@
+.navbar-items {
+    display: flex;
+    box-sizing: border-box;
+    padding: 0 16px;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    // white-space: nowrap;
+    justify-content: space-between;
+}
+
+.right-elements {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+mat-toolbar {
+    background: #1C1C39;
+}
+
+ul {
+    margin-top: 10px;
+
+    li {
+        list-style: none;
+    }
+}
+
+button {
+    border: 0;
+    outline: none;
+    background-color: transparent;
+}
+
+.user,
+.user-icon {
+    font-size: 14px !important;
+    color: #fff !important;
+}
+
+.user-image {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+@media screen and (max-width: 500px) {
+
+    [hidden] {
+        display: none !important;
+    }
+}

@@ -1,0 +1,20 @@
+<!-- <button (click)="toggleSide()">Toggle</button> -->
+
+<div class="logo-container">
+    <div class="logo">
+        <img src="./../../../assets/img/logo.png" alt="Posto Saúde">
+    </div>
+    <div class="logo-text">Posto Saúde</div>
+    <button class="btn-close" (click)="toggleSide()">
+        <i class="fal fa-times close-icon"></i>
+    </button>
+</div>
+<ul class="sidenav-nav">
+    <li class="sidenav-nav-item" *ngFor="let data of sideData">
+        <a class="sidenav-nav-link" [routerLink]="[data.routerLink]" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">
+            <i class="sidenav-link-icon" [class]="data.icon"></i>
+            <span class="sidenav-link-text">{{data.label}}</span>
+        </a>
+    </li>
+</ul>

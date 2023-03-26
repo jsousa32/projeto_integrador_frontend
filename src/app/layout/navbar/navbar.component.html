@@ -1,0 +1,26 @@
+<mat-toolbar>
+    <div [ngClass]="'!sideBarOpen' ? 'navbar-items' : ''">
+        <button mat-icon-button *ngIf="!sideBarOpen" (click)="toggleSidenav()">
+            <mat-icon style="color: #fff">menu</mat-icon>
+        </button>
+        <div class="right-elements mr-2 ml-auto">
+            <ul>
+                <li>
+                    <button mat-button [hidden]="sideBarOpen" [matMenuTriggerFor]="menu"
+                        class="user mt-2 d-flex align-items-center">
+                        <img src="../../../assets/img/logo.png" alt="User" class="user-image mr-1 p-2">
+                        Username
+                        <i class="user-icon fal fa-angle-down"></i>
+                    </button>
+
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                            <mat-icon>exit_to_app</mat-icon>
+                            Logout
+                        </button>
+                    </mat-menu>
+                </li>
+            </ul>
+        </div>
+    </div>
+</mat-toolbar>

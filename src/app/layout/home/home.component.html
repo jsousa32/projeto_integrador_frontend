@@ -1,3 +1,9 @@
-<div class="structure">
-    <p>Home</p>
-</div>
+<mat-drawer-container>
+    <mat-drawer class="sidebar" mode="side" [opened]="sideBarOpen">
+        <app-sidenav (toggleSidebar)="sideBarToggler()"></app-sidenav>
+    </mat-drawer>
+    <mat-drawer-content>
+        <app-navbar [sideBarOpen]="sideBarOpen" (toggleSide)="sideBarToggler()"></app-navbar>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

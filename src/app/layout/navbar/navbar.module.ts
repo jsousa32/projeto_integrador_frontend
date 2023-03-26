@@ -1,23 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './navbar.component';
 import { MaterialModule } from 'src/material.module';
-import { PrimeNgModule } from 'src/primeng.module';
+
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     CommonModule,
-    RouterModule,
     MaterialModule,
-    PrimeNgModule
   ],
   exports: [
-    HomeModule
+    NavbarModule
   ]
 })
-export class HomeModule { }
+export class NavbarModule { }
