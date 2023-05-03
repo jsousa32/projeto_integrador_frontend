@@ -1,35 +1,102 @@
 <div class="container-fluid">
     <mat-card>
         <mat-card-header>
-            <h1>
-                Faça seu login
-            </h1>
+            <h1>Faça seu login</h1>
         </mat-card-header>
-        <mat-card-content class="mt-2">
+
+        <mat-card-content>
             <mat-form-field appearance="outline">
-                <mat-label>CPF</mat-label>
-                <input matInput placeholder="CPF">
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Senha</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hide = !hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
+                <mat-label>Select an option</mat-label>
+                <mat-select [(value)]="selected">
+                    <mat-option value="patient">Paciente</mat-option>
+                    <mat-option value="user">Administrador</mat-option>
+                </mat-select>
             </mat-form-field>
         </mat-card-content>
-        <mat-card-footer class=" mb-2">
+
+        <mat-card-content class="mt-2" *ngIf="selected === 'user'">
+            <form [formGroup]="form" (keydown.enter)="login()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input
+                        formControlName="email"
+                        matInput
+                        placeholder="postinhoubs@gov.com.br"
+                    />
+                    <mat-error>E-mail inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input
+                        formControlName="password"
+                        matInput
+                        [type]="hide ? 'password' : 'text'"
+                    />
+                    <mat-icon matSuffix (click)="hide = !hide">{{
+                        hide ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <mat-error>Senha inválido</mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+
+        <mat-card-content class="mt-2" *ngIf="selected === 'patient'">
+            <form [formGroup]="form" (keydown.enter)="login()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Número SUS</mat-label>
+                    <input
+                        formControlName="susNumber"
+                        mask="000000000000000"
+                        matInput
+                        placeholder="123456789012345"
+                    />
+                    <mat-error>Numero SUS inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input
+                        formControlName="password"
+                        matInput
+                        [type]="hide ? 'password' : 'text'"
+                    />
+                    <mat-icon matSuffix (click)="hide = !hide">{{
+                        hide ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                    <mat-error>Senha inválido</mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+
+        <mat-card-footer class="mb-2">
             <div class="m-2">
-                <button mat-fab extended class="login-button">
+                <button
+                    *ngIf="!isLoading"
+                    type="submit"
+                    mat-fab
+                    extended
+                    class="login-button"
+                    (click)="login()"
+                >
                     Entrar
+                </button>
+
+                <button
+                    type="submit"
+                    mat-fab
+                    extended
+                    class="login-button"
+                    *ngIf="isLoading"
+                >
+                    <mat-icon
+                        ><mat-spinner color="accent" diameter="25">
+                        </mat-spinner
+                    ></mat-icon>
                 </button>
             </div>
             <div class="mt-4 mb-3">
                 <span>
                     Não é cadastrado?
-                    <a href="signup">
-                        Cadastra-se aqui!
-                    </a>
+                    <a href="signup"> Cadastra-se aqui! </a>
                 </span>
             </div>
         </mat-card-footer>
