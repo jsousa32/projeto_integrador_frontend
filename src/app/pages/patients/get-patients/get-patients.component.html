@@ -1,0 +1,84 @@
+<div class="card">
+    <p-toolbar styleClass="justify-content-end mb-2 gap-2">
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="Paciente"
+                icon="pi pi-plus"
+                class="p-button-success"
+                (click)="createPatient()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt1
+        [value]="patients"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        scrollHeight="500px"
+        currentPageReportTemplate="{first} - {last} de {totalRecords} Pacientes"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        [globalFilterFields]="['susNumber', 'name', 'email', 'telephone']"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input
+                        #search
+                        pInputText
+                        type="text"
+                        (input)="dt1.filterGlobal(search.value, 'contains')"
+                        placeholder="Busque pelo número do sus, nome, email ou telefone do paciente. Ex: João"
+                    />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pColumn="susNumber" style="width: 25%">Número SUS</th>
+                <th pSortableColumn="name" style="width: 25%">
+                    Nome <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pColumn="email" style="width: 25%">E-mail</th>
+                <th pColumn="telephone" style="width: 25%">Telefone</th>
+                <th style="width: 5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-patients>
+            <tr>
+                <td>{{ patients.susNumber }}</td>
+                <td>{{ patients.name }}</td>
+                <td>{{ patients.email }}</td>
+                <td>{{ patients.telephone }}</td>
+                <td>
+                    <div
+                        class="flex align-items-center justify-content-center gap-2"
+                    >
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text"
+                            (click)="editPatient(patients)"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-text p-button-danger"
+                            (click)="deletePatient(patients)"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

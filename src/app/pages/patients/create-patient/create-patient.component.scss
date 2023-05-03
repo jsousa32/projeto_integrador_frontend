@@ -1,0 +1,61 @@
+.container-fluid {
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-form-field {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+button {
+    width: 75%;
+}
+
+@media screen and (max-width: 500px) {
+    mat-form-field,
+    button {
+        width: 100%;
+    }
+
+    mat-card {
+        width: auto;
+        margin: 5px;
+    }
+
+    .content {
+        height: auto;
+        margin: 20px 0 20px 0;
+    }
+
+    h1 {
+        font-weight: 500 !important;
+        font-size: 20px !important;
+        text-align: center;
+    }
+}
+
+a,
+span {
+    color: black;
+    font-size: larger;
+    font-weight: 500;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+.create-button {
+    background-color: #1c1c39 !important;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #ac1212 !important;
+    color: white;
+}
