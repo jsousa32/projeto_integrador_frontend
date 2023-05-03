@@ -1,0 +1,105 @@
+<div class="card">
+    <div class="cards-dashboard mt-4 mb-4">
+        <p-card
+            class="mt-4"
+            header="Médicos cadastrados"
+            [style]="{
+                width: '360px',
+                borderRadius: '15px',
+                boxShadow: 'none',
+                backgroundColor: '#1C1C39',
+                color: 'white',
+                display: 'flex',
+                justifyContent: 'center'
+            }"
+        >
+            <ng-template pTemplate="content">
+                <b
+                    ><span>{{
+                        dashboard ? dashboard.numberDoctor : 0
+                    }}</span></b
+                >
+            </ng-template>
+        </p-card>
+
+        <p-card
+            class="mt-4"
+            header="Pacientes cadastrados"
+            [style]="{
+                width: '360px',
+                borderRadius: '15px',
+                boxShadow: 'none',
+                backgroundColor: '#1C1C39',
+                color: 'white',
+                display: 'flex',
+                justifyContent: 'center'
+            }"
+        >
+            <ng-template pTemplate="content">
+                <b
+                    ><span>{{
+                        dashboard ? dashboard.numberPatient : 0
+                    }}</span></b
+                >
+            </ng-template>
+        </p-card>
+
+        <p-card
+            class="mt-4"
+            header="Consultas cadastradas"
+            [style]="{
+                width: '360px',
+                borderRadius: '15px',
+                boxShadow: 'none',
+                backgroundColor: '#1C1C39',
+                color: 'white',
+                display: 'flex',
+                justifyContent: 'center'
+            }"
+        >
+            <ng-template pTemplate="content">
+                <b
+                    ><span>{{
+                        dashboard ? dashboard.numberAppointments : 0
+                    }}</span></b
+                >
+            </ng-template>
+        </p-card>
+    </div>
+
+    <div class="table mt-4">
+        <p-table
+            #dt1
+            [value]="medicines"
+            [rows]="5"
+            [tableStyle]="{ 'min-width': '50rem' }"
+            scrollHeight="500px"
+        >
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 20%">Nome</th>
+                    <th style="width: 20%">Fabricante</th>
+                    <th style="width: 20%">Quantidade</th>
+                    <th style="width: 20%">Unidade</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-medicines>
+                <tr
+                    [ngClass]="
+                        medicines.quantity < 100
+                            ? 'text-danger'
+                            : medicines.quantity > 100 &&
+                              medicines.quantity < 200
+                            ? 'text-warning'
+                            : ''
+                    "
+                >
+                    <td>{{ medicines.name }}</td>
+                    <td>{{ medicines.manufacturer }}</td>
+                    <td>{{ medicines.quantity }}</td>
+                    <td>{{ medicines.packaging }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
