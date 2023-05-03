@@ -1,0 +1,91 @@
+<div class="card">
+    <p-toolbar styleClass="justify-content-end mb-2 gap-2">
+        <ng-template pTemplate="right">
+            <button
+                *ngIf="user.isAdmin"
+                pButton
+                pRipple
+                label="Medicamento"
+                icon="pi pi-plus"
+                class="p-button-success"
+                (click)="createMedicine()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        #dt1
+        [value]="medicines"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        scrollHeight="500px"
+        currentPageReportTemplate="{first} - {last} de {totalRecords} Medicamentos"
+        [rowsPerPageOptions]="[5, 10, 25]"
+        [globalFilterFields]="['name', 'manufacturer', 'recommendation']"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input
+                        #search
+                        pInputText
+                        type="text"
+                        (input)="dt1.filterGlobal(search.value, 'contains')"
+                        placeholder="Busque pelo nome, fabricante ou recomendação do medicamento. Ex: Azitromicina"
+                    />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" style="width: 20%">
+                    Nome <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="manufacturer" style="width: 20%">
+                    Fabricante <p-sortIcon field="manufacturer"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity" style="width: 20%">
+                    Quantidade <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th style="width: 20%">Unidade</th>
+                <th style="width: 20%">Recomendação</th>
+                <th *ngIf="user.isAdmin" style="width: 5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-medicines>
+            <tr>
+                <td>{{ medicines.name }}</td>
+                <td>{{ medicines.manufacturer }}</td>
+                <td>{{ medicines.quantity }}</td>
+                <td>{{ medicines.packaging }}</td>
+                <td>{{ medicines.recommendation }}</td>
+                <td *ngIf="user.isAdmin">
+                    <div
+                        class="flex align-items-center justify-content-center gap-2"
+                    >
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text"
+                            (click)="editMedicine(medicines)"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-text p-button-danger"
+                            (click)="deleteMedicine(medicines)"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <h1 class="mt-4">{{ nameScreen }}</h1>
+
+    <form [formGroup]="form">
+        <div class="mt-2 row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input
+                        [ngModel]="medicine ? medicine.name : ''"
+                        matInput
+                        formControlName="name"
+                        placeholder="Amoxicilina"
+                    />
+                    <mat-error>Nome inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Fabricante</mat-label>
+                    <input
+                        [ngModel]="medicine ? medicine.manufacturer : ''"
+                        matInput
+                        formControlName="manufacturer"
+                        placeholder="Medley"
+                    />
+                    <mat-error>Fabricante inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Quantidade</mat-label>
+                    <input
+                        type="number"
+                        [ngModel]="medicine ? medicine.quantity : ''"
+                        formControlName="quantity"
+                        matInput
+                        placeholder="10"
+                    />
+                    <mat-error>Quantidade inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Unidade</mat-label>
+                    <input
+                        [ngModel]="medicine ? medicine.packaging : ''"
+                        formControlName="packaging"
+                        matInput
+                        placeholder="Caixas"
+                    />
+                    <mat-error>Unidade inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Recomendação</mat-label>
+                    <input
+                        [ngModel]="medicine ? medicine.recommendation : ''"
+                        formControlName="recommendation"
+                        matInput
+                        placeholder="Inflamações"
+                    />
+                    <mat-error>Recomendação inválida</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+
+    <button
+        mat-fab
+        extended
+        class="mt-2 create-button"
+        [disabled]="form.invalid"
+        (click)="medicine ? updateMedicine() : createMedicine()"
+    >
+        {{ nameButton }}
+    </button>
+
+    <button mat-fab extended class="mt-2 mb-3 cancel-button" (click)="cancel()">
+        Cancelar
+    </button>
+</div>

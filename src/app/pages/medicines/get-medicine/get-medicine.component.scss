@@ -1,0 +1,29 @@
+.card {
+    height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+p-table,
+p-toolbar {
+    width: 100% !important;
+}
+
+span,
+input {
+    width: 100%;
+}
+
+th,
+td {
+    text-align: center !important;
+}
+
+@media screen and (max-width: 500px) {
+
+    [hidden] {
+        display: none !important;
+    }
+}
