@@ -1,0 +1,53 @@
+.card {
+    height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+.cards-appointments {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+p-table,
+p-toolbar {
+    width: 100% !important;
+}
+
+span,
+input {
+    width: 100%;
+}
+
+th,
+td {
+    text-align: center !important;
+}
+
+@media screen and (max-width: 500px) {
+    [hidden] {
+        display: none !important;
+    }
+
+    .cards-appointments {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+    }
+
+    :host ::ng-deep .p-card {
+        width: auto !important;
+    }
+}
+
+:host ::ng-deep .p-card .p-card-content {
+    font-size: 20px;
+}

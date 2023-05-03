@@ -1,0 +1,128 @@
+<div class="card">
+    <p-toolbar styleClass="justify-content-end mb-2 gap-2">
+        <ng-template pTemplate="right">
+            <button
+                pButton
+                pRipple
+                label="Consulta"
+                icon="pi pi-plus"
+                class="p-button-success"
+                (click)="createAppointment()"
+            ></button>
+        </ng-template>
+    </p-toolbar>
+
+    <p-table
+        *ngIf="user.isAdmin"
+        #dt1
+        [value]="appointments"
+        [paginator]="true"
+        [rows]="5"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        scrollHeight="500px"
+        currentPageReportTemplate="{first} - {last} de {totalRecords} Consultas"
+        [globalFilterFields]="[
+            'Doctor.name',
+            'Patient.name',
+            'Patient.susNumber',
+            'date',
+            'createdAt'
+        ]"
+        [rowsPerPageOptions]="[5, 10, 25]"
+    >
+        <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input
+                        #search
+                        pInputText
+                        type="text"
+                        (input)="dt1.filterGlobal(search.value, 'contains')"
+                        placeholder="Busque pelo nome do médico, do paciente, pelo número do sus e por datas. Ex: 09/04/2023"
+                    />
+                </span>
+            </div>
+        </ng-template>
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 15%">Nome Médico</th>
+                <th style="width: 15%">Nome Paciente</th>
+                <th style="width: 15%">Paciente Nº SUS</th>
+                <th pSortableColumn="date" style="width: 15%">
+                    Data Consulta
+                    <p-sortIcon field="date"></p-sortIcon>
+                </th>
+                <th pSortableColumn="time" style="width: 15%">
+                    Horário <p-sortIcon field="time"></p-sortIcon>
+                </th>
+                <th pSortableColumn="createdAt" style="width: 15%">
+                    Data Criação
+                    <p-sortIcon field="createdAt"></p-sortIcon>
+                </th>
+                <th style="width: 5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-appointments>
+            <tr>
+                <td>{{ appointments.Doctor.name }}</td>
+                <td>{{ appointments.Patient.name }}</td>
+                <td>{{ appointments.Patient.susNumber }}</td>
+                <td>{{ appointments.date }}</td>
+                <td>{{ appointments.time }}</td>
+                <td>{{ appointments.createdAt }}</td>
+                <td>
+                    <div
+                        class="flex align-items-center justify-content-center gap-2"
+                    >
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-pencil"
+                            class="p-button-rounded p-button-text"
+                            (click)="updateAppointment(appointments)"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-text p-button-danger"
+                            (click)="deleteAppointment(appointments)"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div *ngIf="!user.isAdmin" class="cards-appointments">
+        <div class="mr-2 mt-2" *ngFor="let appointment of appointments">
+            <p-card
+                header="Consulta marcada"
+                [style]="{
+                    width: '360px',
+                    borderRadius: '15px',
+                    boxShadow: 'none',
+                    backgroundColor: '#1C1C39',
+                    color: 'white',
+                    display: 'flex',
+                    justifyContent: 'center'
+                }"
+            >
+                <ng-template pTemplate="content">
+                    <b><span>Data consulta: </span></b> {{ appointment.date
+                    }}<br />
+                    <b><span>Horário: </span></b>{{ appointment.time }}<br />
+                    <b><span>Médico: </span></b>{{ appointment.Doctor.name
+                    }}<br />
+                    <b><span>Especialidade: </span></b
+                    >{{ appointment.Doctor.speciality }}
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>
