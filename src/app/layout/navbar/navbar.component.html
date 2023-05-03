@@ -6,15 +6,31 @@
         <div class="right-elements mr-2 ml-auto">
             <ul>
                 <li>
-                    <button mat-button [hidden]="sideBarOpen" [matMenuTriggerFor]="menu"
-                        class="user mt-2 d-flex align-items-center">
-                        <img src="../../../assets/img/logo.png" alt="User" class="user-image mr-1 p-2">
-                        Username
+                    <button
+                        mat-button
+                        [hidden]="sideBarOpen"
+                        [matMenuTriggerFor]="menu"
+                        class="user mt-2 d-flex align-items-center"
+                    >
+                        <img
+                            src="../../../assets/img/logo.png"
+                            alt="User"
+                            class="user-image mr-1 p-2"
+                        />
+                        {{ user.name }}
                         <i class="user-icon fal fa-angle-down"></i>
                     </button>
 
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button
+                            *ngIf="!user.isAdmin"
+                            mat-menu-item
+                            (click)="editProfile()"
+                        >
+                            <mat-icon>person_outline</mat-icon>
+                            Perfil
+                        </button>
+                        <button mat-menu-item (click)="logout()">
                             <mat-icon>exit_to_app</mat-icon>
                             Logout
                         </button>

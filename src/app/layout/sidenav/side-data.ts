@@ -1,27 +1,37 @@
 export const sideData = [
     {
-        routerLink: "dashboard",
-        icon: "fal fa-home",
-        label: "Dashboard"
+        routerLink: 'dashboard',
+        icon: 'fal fa-home',
+        label: 'Dashboard',
+        isAdmin: true,
+        isUser: false,
     },
     {
-        routerLink: "medicines",
-        icon: "fal fa-capsules",
-        label: "Medicines"
+        routerLink: 'medicines',
+        icon: 'fal fa-capsules',
+        label: 'Medicamentos',
+        isAdmin: true,
+        isUser: true,
     },
     {
-        routerLink: "patient",
-        icon: "fal fa-user",
-        label: "Patients"
+        routerLink: 'doctors',
+        icon: 'fal fa-stethoscope',
+        label: 'Médicos',
+        isAdmin: true,
+        isUser: true,
     },
     {
-        routerLink: "doctors",
-        icon: "fal fa-stethoscope",
-        label: "Doctors"
+        routerLink: 'appointments',
+        icon: 'fal fa-calendar-check',
+        label: 'Consultas',
+        isAdmin: true,
+        isUser: true,
     },
     {
-        routerLink: "appointment",
-        icon: "fal fa-calendar-check",
-        label: "Appointment"
-    }
+        routerLink: 'patients',
+        icon: 'fal fa-user',
+        label: 'Pacientes',
+        isAdmin: true,
+        isUser: false,
+    },
 ];

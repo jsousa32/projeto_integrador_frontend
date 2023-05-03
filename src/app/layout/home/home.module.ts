@@ -14,7 +14,6 @@ import { PrimeNgModule } from 'src/primeng.module';
     CommonModule,
     RouterModule,
     MaterialModule,
-    PrimeNgModule
   ],
   exports: [
     HomeModule
