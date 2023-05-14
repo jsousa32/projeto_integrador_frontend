@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import Swal from 'sweetalert2';
 import { StorageService } from 'src/app/services/storage.service';
 import { LoginUser } from 'src/app/model/loginModel';
+import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
     selector: 'app-get-appointments',
@@ -19,6 +20,7 @@ export class GetAppointmentsComponent implements OnInit {
 
     constructor(
         private appointmentService: AppointmentService,
+        private patientService: PatientService,
         public dialog: MatDialog,
         private storageService: StorageService
     ) {}
@@ -139,6 +141,77 @@ export class GetAppointmentsComponent implements OnInit {
                                     <b><span style="font-size: 30px">Desculpe!</span></b>
                                     <div class="mt-3">
                                         <h2>Não foi possível a deleção da consulta!</h2>
+                                    </div>
+                                </div>
+                            `,
+                            icon: 'warning',
+                            confirmButtonColor: '#1c1c39',
+                            confirmButtonText: 'Ok',
+                        });
+                    });
+            }
+        });
+    }
+
+    patientAbsent(appointment: AppointmentModels) {
+        Swal.fire({
+            icon: 'warning',
+            html: `
+            <div style="text-align: center">
+                <h2>O paciente não esteve presente na consulta?</h2>
+                <div class="mt-2">
+                    <b><span>Nome: </span></b> ${appointment.Patient.name}
+                </div>
+                <div class="mt-2 mb-2">
+                    <b><span>Número do SUS: </span></b> ${appointment.Patient.susNumber}
+                </div>
+                <div class="mt-2 mb-2">
+                    <b><span>Médico(a): </span></b> ${appointment.Doctor.name}
+                </div>
+                <div class="mt-2 mb-2">
+                    <b><span>Data consulta: </span></b> ${appointment.date}
+                </div>
+            </div>
+                 `,
+            showCancelButton: true,
+            confirmButtonColor: '#1c1c39',
+            cancelButtonColor: '#ac1212',
+            confirmButtonText: 'Sim',
+            cancelButtonText: 'Não',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const date = new Date();
+                const dataBlock = moment(date).add(15, 'days').toISOString();
+
+                appointment.Patient.absentAt = dataBlock;
+
+                this.patientService
+                    .updatePatient(appointment.Patient.id, appointment.Patient)
+                    .toPromise()
+                    .then(() => {
+                        Swal.fire({
+                            html: ` 
+                                <div style="text-align: center">
+                                    <b><span style="font-size: 30px">Parabéns!</span></b>
+                                    <div class="mt-3">
+                                        <h2>O paciente foi bloqueado por quinze (15) dias com sucesso!</h2>
+                                    </div>
+                                </div>
+                            `,
+                            icon: 'success',
+                            confirmButtonColor: '#1c1c39',
+                            confirmButtonText: 'Ok',
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    })
+                    .catch(() => {
+                        Swal.fire({
+                            html: ` 
+                                <div style="text-align: center">
+                                    <b><span style="font-size: 30px">Desculpe!</span></b>
+                                    <div class="mt-3">
+                                        <h2>Não foi possível o bloqueio do paciente!</h2>
                                     </div>
                                 </div>
                             `,

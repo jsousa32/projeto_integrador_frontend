@@ -153,13 +153,19 @@ export class CreateAppointmentComponent implements OnInit {
         }
     }
 
-    createAppointment() {
-        this.create = {
-            date: this.form.get('date')?.value,
-            time: this.form.get('time')?.value,
-            DoctorId: this.form.get('DoctorId')?.value,
-            PatientId: this.patient.id,
-        };
+    async createAppointment() {
+        await this.patientService
+            .getPatientBySusNumber(this.form.get('PatientSusNumber')?.value)
+            .toPromise()
+            .then((result) => {
+                this.create = {
+                    date: this.form.get('date')?.value,
+                    time: this.form.get('time')?.value,
+                    DoctorId: this.form.get('DoctorId')?.value,
+                    PatientId: result!.id,
+                };
+            });
+
         this.appointmentService
             .createAppointments(this.create)
             .toPromise()
@@ -202,13 +208,19 @@ export class CreateAppointmentComponent implements OnInit {
             });
     }
 
-    updateAppointment() {
-        this.create = {
-            date: this.form.get('date')?.value,
-            time: this.form.get('time')?.value,
-            DoctorId: this.form.get('DoctorId')?.value,
-            PatientId: this.patient.id,
-        };
+    async updateAppointment() {
+        await this.patientService
+            .getPatientBySusNumber(this.form.get('PatientSusNumber')?.value)
+            .toPromise()
+            .then((result) => {
+                this.create = {
+                    date: this.form.get('date')?.value,
+                    time: this.form.get('time')?.value,
+                    DoctorId: this.form.get('DoctorId')?.value,
+                    PatientId: result!.id,
+                };
+            });
+
         this.appointmentService
             .updateAppointment(this.appointment.id, this.create)
             .toPromise()

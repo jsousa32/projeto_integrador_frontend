@@ -83,8 +83,25 @@
                             type="button"
                             icon="pi pi-pencil"
                             class="p-button-rounded p-button-text"
-                            (click)="updateAppointment(appointments)"
+                            [matMenuTriggerFor]="menu"
                         ></button>
+                        <mat-menu #menu="matMenu">
+                            <button
+                                mat-menu-item
+                                (click)="updateAppointment(appointments)"
+                            >
+                                <mat-icon>calendar_today</mat-icon>
+                                <span>Atualizar</span>
+                            </button>
+                            <button
+                                mat-menu-item
+                                (click)="patientAbsent(appointments)"
+                            >
+                                <mat-icon>block</mat-icon>
+                                <span>Paciente Ausente</span>
+                            </button>
+                        </mat-menu>
+
                         <button
                             pButton
                             pRipple
