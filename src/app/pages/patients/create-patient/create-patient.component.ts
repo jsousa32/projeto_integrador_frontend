@@ -121,7 +121,7 @@ export class CreatePatientComponent implements OnInit {
                     <div style="text-align: center">
                         <b><span style="font-size: 30px">Parabéns!</span></b>
                         <div class="mt-3">
-                            <h2>Você cadastrou o paciente com sucesso!</h2>
+                            <h2>Você atualizou o paciente com sucesso!</h2>
                         </div>
                     </div>
                 `,
@@ -138,7 +138,7 @@ export class CreatePatientComponent implements OnInit {
                     <div style="text-align: center">
                         <b><span style="font-size: 30px">Desculpe!</span></b>
                         <div class="mt-3">
-                            <h2>Não foi possível o cadastro do paciente!</h2>
+                            <h2>Não foi possível a atualização do paciente!</h2>
                         </div>
                     </div>
                 `,

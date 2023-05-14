@@ -4,6 +4,7 @@ import { PatientService } from 'src/app/services/patient.service';
 import { CreatePatientComponent } from '../create-patient/create-patient.component';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-get-patients',
@@ -28,6 +29,11 @@ export class GetPatientsComponent implements OnInit {
             .toPromise()
             .then((result) => {
                 this.patients = result!;
+                this.patients.forEach((patients) => {
+                    patients.absentAt = moment(patients.absentAt).format(
+                        'DD/MM/YYYY'
+                    );
+                });
             });
     }
 
@@ -89,15 +95,18 @@ export class GetPatientsComponent implements OnInit {
                             window.location.reload();
                         });
                     })
-                    .catch(() => {
+                    .catch((err) => {
                         Swal.fire({
                             html: ` 
-                                <div style="text-align: center">
-                                    <b><span style="font-size: 30px">Desculpe!</span></b>
+                            <div style="text-align: center">
+                                <b><span style="font-size: 30px">Desculpe!</span></b>
                                     <div class="mt-3">
                                         <h2>Não foi possível a deleção do paciente!</h2>
                                     </div>
-                                </div>
+                                    <div class="mt-2">
+                                        <h2>${err.error.message}</h2>
+                                    </div>
+                            </div>
                             `,
                             icon: 'warning',
                             confirmButtonColor: '#1c1c39',

@@ -6,6 +6,7 @@ export interface PatientModels {
     password: string;
     telephone: string;
     isAdmin: boolean;
+    absentAt: string;
     createdAt: string;
     updatedAt: string;
     deletedAt: string;

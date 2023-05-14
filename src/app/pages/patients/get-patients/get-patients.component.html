@@ -47,6 +47,7 @@
                 </th>
                 <th pColumn="email" style="width: 25%">E-mail</th>
                 <th pColumn="telephone" style="width: 25%">Telefone</th>
+                <th pColumn="absentAt" style="width: 25%">Bloqueado</th>
                 <th style="width: 5%"></th>
             </tr>
         </ng-template>
@@ -56,6 +57,7 @@
                 <td>{{ patients.name }}</td>
                 <td>{{ patients.email }}</td>
                 <td>{{ patients.telephone }}</td>
+                <td>{{ patients.absentAt }}</td>
                 <td>
                     <div
                         class="flex align-items-center justify-content-center gap-2"

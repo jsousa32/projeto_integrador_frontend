@@ -18,6 +18,12 @@ export class PatientService {
         return this.httpRequest.get<PatientModels>(`${this.url}/patient/` + id);
     }
 
+    getPatientBySusNumber(susNumber: string) {
+        return this.httpRequest.get<PatientModels>(
+            `${this.url}/patient/susNumber/` + susNumber
+        );
+    }
+
     updatePatient(id: number, patient: PatientModels) {
         return this.httpRequest.put<void>(`${this.url}/patient/` + id, patient);
     }

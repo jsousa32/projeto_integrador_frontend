@@ -95,15 +95,18 @@ export class GetDoctorsComponent implements OnInit {
                             window.location.reload();
                         });
                     })
-                    .catch(() => {
+                    .catch((err) => {
                         Swal.fire({
                             html: ` 
-                                <div style="text-align: center">
-                                    <b><span style="font-size: 30px">Desculpe!</span></b>
+                            <div style="text-align: center">
+                                <b><span style="font-size: 30px">Desculpe!</span></b>
                                     <div class="mt-3">
                                         <h2>Não foi possível a deleção do médico!</h2>
                                     </div>
-                                </div>
+                                    <div class="mt-2">
+                                        <h2>${err.error.message}</h2>
+                                    </div>
+                            </div>
                             `,
                             icon: 'warning',
                             confirmButtonColor: '#1c1c39',
