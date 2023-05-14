@@ -19,6 +19,13 @@
     text-align: center;
 }
 
+:host ::ng-deep .p-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 p-table,
 p-toolbar {
     width: 100% !important;
@@ -32,4 +39,23 @@ td {
 .table {
     width: 100%;
     height: 500px;
+}
+
+@media screen and (max-width: 500px) {
+    .card,
+    .table {
+        height: auto;
+    }
+
+    .cards-appointments {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+    }
+
+    :host ::ng-deep .p-card {
+        width: auto !important;
+    }
 }

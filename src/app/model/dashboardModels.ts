@@ -1,8 +1,11 @@
 import { MedicineModels } from './medicinesModel';
 
 export interface DashboardModels {
-    numberDoctor: number;
-    numberPatient: number;
-    numberAppointments: number;
+    numberAppointmentsAtDay: number;
+    numberAppointments: appointments[];
     medicine: MedicineModels[];
+}
+interface appointments {
+    count: number;
+    speciality: string;
 }

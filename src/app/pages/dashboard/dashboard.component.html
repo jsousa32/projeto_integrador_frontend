@@ -2,12 +2,13 @@
     <div class="cards-dashboard mt-4 mb-4">
         <p-card
             class="mt-4"
-            header="Médicos cadastrados"
+            header="Total Consultas Diária"
             [style]="{
                 width: '360px',
                 borderRadius: '15px',
                 boxShadow: 'none',
                 backgroundColor: '#1C1C39',
+                height: '200px',
                 color: 'white',
                 display: 'flex',
                 justifyContent: 'center'
@@ -16,7 +17,7 @@
             <ng-template pTemplate="content">
                 <b
                     ><span>{{
-                        dashboard ? dashboard.numberDoctor : 0
+                        dashboard ? dashboard.numberAppointmentsAtDay : 0
                     }}</span></b
                 >
             </ng-template>
@@ -24,11 +25,12 @@
 
         <p-card
             class="mt-4"
-            header="Pacientes cadastrados"
+            header="Consultas Cadastradas"
             [style]="{
                 width: '360px',
                 borderRadius: '15px',
                 boxShadow: 'none',
+                height: '200px',
                 backgroundColor: '#1C1C39',
                 color: 'white',
                 display: 'flex',
@@ -36,33 +38,13 @@
             }"
         >
             <ng-template pTemplate="content">
-                <b
-                    ><span>{{
-                        dashboard ? dashboard.numberPatient : 0
-                    }}</span></b
-                >
-            </ng-template>
-        </p-card>
-
-        <p-card
-            class="mt-4"
-            header="Consultas cadastradas"
-            [style]="{
-                width: '360px',
-                borderRadius: '15px',
-                boxShadow: 'none',
-                backgroundColor: '#1C1C39',
-                color: 'white',
-                display: 'flex',
-                justifyContent: 'center'
-            }"
-        >
-            <ng-template pTemplate="content">
-                <b
-                    ><span>{{
-                        dashboard ? dashboard.numberAppointments : 0
-                    }}</span></b
-                >
+                <b *ngFor="let appointment of dashboard.numberAppointments"
+                    ><span style="font-size: 24px"
+                        >{{ appointment.speciality }} :
+                    </span>
+                    <span style="font-size: 24px">{{ appointment.count }}</span>
+                    <br />
+                </b>
             </ng-template>
         </p-card>
     </div>
@@ -88,10 +70,10 @@
                     [ngClass]="
                         medicines.quantity < 100
                             ? 'text-danger'
-                            : medicines.quantity > 100 &&
-                              medicines.quantity < 200
+                            : medicines.quantity >= 100 &&
+                              medicines.quantity <= 200
                             ? 'text-warning'
-                            : ''
+                            : 'text-primary'
                     "
                 >
                     <td>{{ medicines.name }}</td>
