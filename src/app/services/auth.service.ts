@@ -20,4 +20,20 @@ export class AuthService {
             headers: headers,
         });
     }
+
+    forgot(username: string) {
+        return this.httpRequest.post<void>(`${this.url}/auth/forgot`, {
+            username: username,
+        });
+    }
+
+    reset(username: string, password: string) {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            Authorization: 'Basic ' + window.btoa(username + ':' + password),
+        });
+        return this.httpRequest.get<void>(`${this.url}/auth/reset`, {
+            headers: headers,
+        });
+    }
 }

@@ -25,6 +25,8 @@ import { CreateDoctorComponent } from './pages/doctors/create-doctor/create-doct
 import { GetAppointmentsComponent } from './pages/appointment/get-appointments/get-appointments.component';
 import { CreateAppointmentComponent } from './pages/appointment/create-appointment/create-appointment.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ForgotComponent } from './pages/forgot/forgot.component';
+import { ResetComponent } from './pages/reset/reset.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +46,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
         CreateAppointmentComponent,
         GetAppointmentsComponent,
         ProfileComponent,
+        ForgotComponent,
+        ResetComponent,
     ],
     imports: [
         BrowserModule,

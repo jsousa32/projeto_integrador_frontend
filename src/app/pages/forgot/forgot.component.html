@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <mat-card>
         <mat-card-header>
-            <h1>Faça seu login</h1>
+            <h1>Recupere sua senha</h1>
         </mat-card-header>
 
         <mat-card-content>
@@ -15,7 +15,7 @@
         </mat-card-content>
 
         <mat-card-content class="mt-2" *ngIf="selected === 'user'">
-            <form [formGroup]="form" (keydown.enter)="login()">
+            <form [formGroup]="form" (keydown.enter)="recoveryPassword()">
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
                     <input
@@ -25,23 +25,11 @@
                     />
                     <mat-error>E-mail inválido</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Senha</mat-label>
-                    <input
-                        formControlName="password"
-                        matInput
-                        [type]="hide ? 'password' : 'text'"
-                    />
-                    <mat-icon matSuffix (click)="hide = !hide">{{
-                        hide ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                    <mat-error>Senha inválido</mat-error>
-                </mat-form-field>
             </form>
         </mat-card-content>
 
         <mat-card-content class="mt-2" *ngIf="selected === 'patient'">
-            <form [formGroup]="form" (keydown.enter)="login()">
+            <form [formGroup]="form" (keydown.enter)="recoveryPassword()">
                 <mat-form-field appearance="outline">
                     <mat-label>Número SUS</mat-label>
                     <input
@@ -51,18 +39,6 @@
                         placeholder="123456789012345"
                     />
                     <mat-error>Numero SUS inválido</mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Senha</mat-label>
-                    <input
-                        formControlName="password"
-                        matInput
-                        [type]="hide ? 'password' : 'text'"
-                    />
-                    <mat-icon matSuffix (click)="hide = !hide">{{
-                        hide ? "visibility_off" : "visibility"
-                    }}</mat-icon>
-                    <mat-error>Senha inválido</mat-error>
                 </mat-form-field>
             </form>
         </mat-card-content>
@@ -75,9 +51,9 @@
                     mat-fab
                     extended
                     class="login-button"
-                    (click)="login()"
+                    (click)="recoveryPassword()"
                 >
-                    Entrar
+                    Recuperar senha
                 </button>
 
                 <button
@@ -93,16 +69,10 @@
                     ></mat-icon>
                 </button>
             </div>
-            <div class="mt-4 mb-2">
-                <span>
-                    Esqueceu senha?
-                    <a href="forgot"> Recupere aqui! </a>
-                </span>
-            </div>
             <div class="mt-4 mb-3">
                 <span>
-                    Não é cadastrado?
-                    <a href="signup"> Cadastra-se aqui! </a>
+                    Lembrou da senha?
+                    <a href="login"> Faça o login aqui! </a>
                 </span>
             </div>
         </mat-card-footer>

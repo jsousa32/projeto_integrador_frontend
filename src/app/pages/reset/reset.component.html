@@ -1,0 +1,69 @@
+<div class="container-fluid">
+    <mat-card>
+        <mat-card-header>
+            <h1>Recupere sua senha</h1>
+        </mat-card-header>
+
+        <mat-card-content class="mt-2">
+            <form [formGroup]="form" (keydown.enter)="resetPassword()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Senha</mat-label>
+                    <input
+                        formControlName="password"
+                        matInput
+                        [type]="hide ? 'password' : 'text'"
+                    />
+                    <button mat-icon-button matSuffix (click)="hide = !hide">
+                        <mat-icon>{{
+                            hide ? "visibility_off" : "visibility"
+                        }}</mat-icon>
+                    </button>
+                    <mat-error>Senha inválida</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Confirmar senha</mat-label>
+                    <input
+                        formControlName="passwordConfirm"
+                        matInput
+                        [type]="hide ? 'password' : 'text'"
+                    />
+                    <mat-error>Senha inválida</mat-error>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+
+        <mat-card-footer class="mb-2">
+            <div class="m-2">
+                <button
+                    *ngIf="!isLoading"
+                    type="submit"
+                    mat-fab
+                    extended
+                    class="login-button"
+                    (click)="resetPassword()"
+                >
+                    Recuperar senha
+                </button>
+
+                <button
+                    type="submit"
+                    mat-fab
+                    extended
+                    class="login-button"
+                    *ngIf="isLoading"
+                >
+                    <mat-icon
+                        ><mat-spinner color="accent" diameter="25">
+                        </mat-spinner
+                    ></mat-icon>
+                </button>
+            </div>
+            <div class="mt-4 mb-3">
+                <span>
+                    Lembrou da senha?
+                    <a href="login"> Faça o login aqui! </a>
+                </span>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</div>

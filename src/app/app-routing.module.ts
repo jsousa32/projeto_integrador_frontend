@@ -10,11 +10,15 @@ import { GetMedicineComponent } from './pages/medicines/get-medicine/get-medicin
 import { GetPatientsComponent } from './pages/patients/get-patients/get-patients.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { RouterGuard } from './guards/router.guard';
+import { ForgotComponent } from './pages/forgot/forgot.component';
+import { ResetComponent } from './pages/reset/reset.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
+    { path: 'forgot', component: ForgotComponent },
+    { path: 'reset/:token', component: ResetComponent },
     {
         path: 'home',
         component: HomeComponent,
