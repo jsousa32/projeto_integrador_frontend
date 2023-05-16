@@ -30,6 +30,7 @@ export class GetPatientsComponent implements OnInit {
             .then((result) => {
                 this.patients = result!;
                 this.patients.forEach((patients) => {
+                    if (patients.absentAt === null) return;
                     patients.absentAt = moment(patients.absentAt).format(
                         'DD/MM/YYYY'
                     );
