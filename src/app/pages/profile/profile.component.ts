@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit {
     form!: FormGroup;
+    isLoading: boolean = false;
     patient!: PatientModels;
 
     constructor(
@@ -26,6 +27,8 @@ export class ProfileComponent implements OnInit {
     }
 
     async search() {
+        this.isLoading = true;
+
         this.form = new FormGroup({
             susNumber: new FormControl(null, [Validators.required]),
             name: new FormControl(null, [
@@ -50,6 +53,8 @@ export class ProfileComponent implements OnInit {
             .then((result) => {
                 this.patient = result!;
             });
+
+        this.isLoading = false;
     }
 
     updateProfile() {

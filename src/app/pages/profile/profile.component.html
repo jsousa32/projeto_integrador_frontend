@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="!isLoading">
     <h1 class="mt-4">Atualização de Cadastro</h1>
 
     <form [formGroup]="form">
