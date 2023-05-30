@@ -67,10 +67,7 @@ export class PatientService {
     }
 
     createPatient(patient: PatientModels) {
-        const headers = this.getHeaders();
-        return this.httpRequest.post<void>(`${this.url}/patient`, patient, {
-            headers: headers,
-        });
+        return this.httpRequest.post<void>(`${this.url}/patient`, patient);
     }
 
     deletePatient(id: number) {
