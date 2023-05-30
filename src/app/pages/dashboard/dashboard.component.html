@@ -37,7 +37,10 @@
                 justifyContent: 'center'
             }"
         >
-            <ng-template pTemplate="content">
+            <ng-template
+                ngIf="!dashboard.numberAppointments.length > 0"
+                pTemplate="content"
+            >
                 <b *ngFor="let appointment of dashboard.numberAppointments"
                     ><span style="font-size: 24px"
                         >{{ appointment.speciality }} :
@@ -45,6 +48,12 @@
                     <span style="font-size: 24px">{{ appointment.count }}</span>
                     <br />
                 </b>
+            </ng-template>
+            <ng-template
+                ngIf="dashboard.numberAppointments.length == 0"
+                pTemplate="content"
+            >
+                <b><span>0</span></b>
             </ng-template>
         </p-card>
     </div>

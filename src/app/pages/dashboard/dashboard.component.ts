@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit {
             .then((result) => {
                 this.dashboard = result!;
                 this.medicines = this.dashboard.medicine;
-                console.log(result);
             });
     }
 }
