@@ -50,10 +50,21 @@ export class SignupComponent implements OnInit {
             this.form.get('password')!.value !==
             this.form.get('passwordConfirm')!.value
         ) {
-            return Swal.fire({
-                title: 'Ocorreu um erro!!',
-                text: 'Senha e confirmar senha não correspondem.',
+            Swal.fire({
+                html: `
+                <div style="text-align: center">
+                    <b><span style="font-size: 30px">Desculpe!</span></b>
+                    <div class="mt-3">
+                        <h2>Não foi possível fazer o cadastro!</h2>
+                    </div>
+                    <div class="mt-2">
+                        <h2>As senhas não coincidem, por favor tente novamente.</h2>
+                    </div>
+                </div>
+            `,
                 icon: 'warning',
+                confirmButtonColor: '#1c1c39',
+                confirmButtonText: 'Ok',
             });
         }
         this.form.removeControl('passwordConfirm');
