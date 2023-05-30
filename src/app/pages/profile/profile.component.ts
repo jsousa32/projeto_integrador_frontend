@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
         this.search();
     }
 
-    search() {
+    async search() {
         this.form = new FormGroup({
             susNumber: new FormControl(null, [Validators.required]),
             name: new FormControl(null, [
@@ -44,9 +44,7 @@ export class ProfileComponent implements OnInit {
 
         this.form.get('susNumber')?.disable();
 
-        console.log(this.user);
-
-        this.patientService
+        await this.patientService
             .getPatientById(this.user.id)
             .toPromise()
             .then((result) => {
