@@ -23,7 +23,7 @@ export class GetPatientsComponent implements OnInit {
         this.search();
     }
 
-    search() {
+    async search() {
         this.patientService
             .getPatient()
             .toPromise()

@@ -1,38 +1,82 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PatientModels } from '../model/patientModel';
+import { StorageService } from './storage.service';
+import { LoginUser } from '../model/loginModel';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
     providedIn: 'root',
 })
 export class PatientService {
-    constructor(private httpRequest: HttpClient) {}
+    user!: LoginUser;
 
-    url = 'http://localhost:8080/api';
+    constructor(
+        private httpRequest: HttpClient,
+        private session: StorageService
+    ) {}
+
+    url = environment.url;
+
+    private getHeaders(): HttpHeaders {
+        this.user = this.session.getStorage('user');
+        const token = this.user.token;
+        const headers = new HttpHeaders().set(
+            'Authorization',
+            `Basic ${token}`
+        );
+        return headers;
+    }
 
     getPatient() {
-        return this.httpRequest.get<PatientModels[]>(`${this.url}/patient`);
+        const headers = this.getHeaders();
+        return this.httpRequest.get<PatientModels[]>(`${this.url}/patient`, {
+            headers: headers,
+        });
     }
 
     getPatientById(id: string) {
-        return this.httpRequest.get<PatientModels>(`${this.url}/patient/` + id);
+        const headers = this.getHeaders();
+        return this.httpRequest.get<PatientModels>(
+            `${this.url}/patient/` + id,
+            {
+                headers: headers,
+            }
+        );
     }
 
     getPatientBySusNumber(susNumber: string) {
+        const headers = this.getHeaders();
         return this.httpRequest.get<PatientModels>(
-            `${this.url}/patient/susNumber/` + susNumber
+            `${this.url}/patient/susNumber/` + susNumber,
+            {
+                headers: headers,
+            }
         );
     }
 
     updatePatient(id: number, patient: PatientModels) {
-        return this.httpRequest.put<void>(`${this.url}/patient/` + id, patient);
+        const headers = this.getHeaders();
+        return this.httpRequest.put<void>(
+            `${this.url}/patient/` + id,
+            patient,
+            {
+                headers: headers,
+            }
+        );
     }
 
     createPatient(patient: PatientModels) {
-        return this.httpRequest.post<void>(`${this.url}/patient`, patient);
+        const headers = this.getHeaders();
+        return this.httpRequest.post<void>(`${this.url}/patient`, patient, {
+            headers: headers,
+        });
     }
 
     deletePatient(id: number) {
-        return this.httpRequest.delete<void>(`${this.url}/patient/` + id);
+        const headers = this.getHeaders();
+        return this.httpRequest.delete<void>(`${this.url}/patient/` + id, {
+            headers: headers,
+        });
     }
 }

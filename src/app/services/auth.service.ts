@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginUser } from '../model/loginModel';
-import { FormGroup } from '@angular/forms';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
 export class AuthService {
     constructor(private httpRequest: HttpClient) {}
 
-    url = 'http://localhost:8080/api';
+    url = environment.url;
 
     login(username: string, password: string) {
         const headers = new HttpHeaders({

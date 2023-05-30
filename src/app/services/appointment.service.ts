@@ -1,51 +1,88 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
     AppointmentCreate,
     AppointmentModels,
 } from '../model/appointmentModel';
+import { environment } from 'src/environments/environment.prod';
+import { LoginUser } from '../model/loginModel';
+import { StorageService } from './storage.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AppointmentService {
-    constructor(private httpRequest: HttpClient) {}
+    user!: LoginUser;
 
-    url = 'http://localhost:8080/api';
+    constructor(
+        private httpRequest: HttpClient,
+        private session: StorageService
+    ) {}
+
+    url = environment.url;
+
+    private getHeaders(): HttpHeaders {
+        this.user = this.session.getStorage('user');
+        const token = this.user.token;
+        const headers = new HttpHeaders().set(
+            'Authorization',
+            `Basic ${token}`
+        );
+        return headers;
+    }
 
     getAppointment() {
+        const headers = this.getHeaders();
+
         return this.httpRequest.get<AppointmentModels[]>(
-            `${this.url}/appointment`
+            `${this.url}/appointment`,
+            { headers: headers }
         );
     }
 
     checkAppointments(date: string, crm: string) {
-        return this.httpRequest.get<[]>(
-            `${this.url}/appointment/date/` + date + `/id/` + crm
+        const headers = this.getHeaders();
+
+        return this.httpRequest.get<AppointmentModels[]>(
+            `${this.url}/appointment/date/` + date + `/id/` + crm,
+            { headers: headers }
         );
     }
 
     createAppointments(appointment: AppointmentCreate) {
+        const headers = this.getHeaders();
+
         return this.httpRequest.post<void>(
             `${this.url}/appointment`,
-            appointment
+            appointment,
+            { headers: headers }
         );
     }
 
     getAppointmentByPatientId(id: string) {
+        const headers = this.getHeaders();
+
         return this.httpRequest.get<AppointmentModels[]>(
-            `${this.url}/appointment/id/` + id
+            `${this.url}/appointment/id/` + id,
+            { headers: headers }
         );
     }
 
     updateAppointment(id: number, appointment: AppointmentCreate) {
+        const headers = this.getHeaders();
+
         return this.httpRequest.put<void>(
             `${this.url}/appointment/` + id,
-            appointment
+            appointment,
+            { headers: headers }
         );
     }
 
     deleteAppointment(id: number) {
-        return this.httpRequest.delete<void>(`${this.url}/appointment/` + id);
+        const headers = this.getHeaders();
+
+        return this.httpRequest.delete<void>(`${this.url}/appointment/` + id, {
+            headers: headers,
+        });
     }
 }
