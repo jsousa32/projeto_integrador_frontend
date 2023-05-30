@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="!isLoading">
     <div class="cards-dashboard mt-4 mb-4">
         <p-card
             class="mt-4"
@@ -38,8 +38,11 @@
             }"
         >
             <ng-template
-                ngIf="!dashboard.numberAppointments.length > 0"
                 pTemplate="content"
+                *ngIf="
+                    dashboard.numberAppointments.length != 0;
+                    else noAppointments
+                "
             >
                 <b *ngFor="let appointment of dashboard.numberAppointments"
                     ><span style="font-size: 24px"
@@ -49,10 +52,8 @@
                     <br />
                 </b>
             </ng-template>
-            <ng-template
-                ngIf="dashboard.numberAppointments.length == 0"
-                pTemplate="content"
-            >
+
+            <ng-template #noAppointments>
                 <b><span>0</span></b>
             </ng-template>
         </p-card>

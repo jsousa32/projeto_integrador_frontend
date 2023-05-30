@@ -12,19 +12,23 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 export class DashboardComponent implements OnInit {
     dashboard!: DashboardModels;
     medicines: MedicineModels[] = [];
+    isLoading: boolean = false;
     constructor(private dashboardService: DashboardService) {}
 
     ngOnInit(): void {
         this.search();
     }
 
-    search() {
-        this.dashboardService
+    async search() {
+        this.isLoading = true;
+        await this.dashboardService
             .getDashboard()
             .toPromise()
             .then((result) => {
                 this.dashboard = result!;
                 this.medicines = this.dashboard.medicine;
             });
+
+        this.isLoading = false;
     }
 }
